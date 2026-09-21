@@ -33,7 +33,7 @@ tracing = "0.1"
 async-trait = "0.1"
 
 # Database (SQLite with vector extensions)
-rusqlite = "0.30"
+rusqlite = "0.40"
 
 # IDs
 uuid = { version = "1.6", features = ["v4", "serde"] }
