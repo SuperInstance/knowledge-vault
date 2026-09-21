@@ -1,0 +1,96 @@
+[workspace]
+# This crate is standalone, not part of the SuperInstance workspace
+
+[package]
+name = "knowledge-vault"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/SuperInstance/knowledge-vault"
+authors = ["SuperInstance Contributors"]
+description = "Vector database with semantic search for RAG applications - embeddings, chunking, and retrieval"
+keywords = ["vector-database", "embeddings", "rag", "semantic-search", "sqlite"]
+categories = ["database", "text-processing", "algorithms"]
+readme = "README.md"
+rust-version = "1.75"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["fs", "sync", "rt", "time", "macros"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Logging
+tracing = "0.1"
+
+# Async trait
+async-trait = "0.1"
+
+# Database (SQLite with vector extensions)
+rusqlite = "0.30"
+
+# IDs
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# File watching
+notify = "6.1"
+
+# Crypto for content hashing
+sha2 = "0.10"
+hex = "0.4"
+
+# Text processing
+unicode-segmentation = "1.11"
+
+# Regex for pattern matching
+regex = "1.10"
+
+# Futures utilities
+futures = "0.3"
+
+[dev-dependencies]
+tokio = { version = "1.35", features = ["full"] }
+tempfile = "3.8"
+tracing-subscriber = "0.3"
+
+[lib]
+name = "knowledge_vault"
+path = "src/lib.rs"
+
+[features]
+default = []
+vss = []  # SQLite-VSS support (when extension is available)
+
+[[example]]
+name = "basic_indexing"
+path = "examples/basic_indexing.rs"
+
+[[example]]
+name = "code_search"
+path = "examples/code_search.rs"
+
+[[example]]
+name = "markdown_search"
+path = "examples/markdown_search.rs"
+
+[[example]]
+name = "streaming_index"
+path = "examples/streaming_index.rs"
+
+[[example]]
+name = "with_privox"
+path = "examples/with_privox.rs"
+required-features = []
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
